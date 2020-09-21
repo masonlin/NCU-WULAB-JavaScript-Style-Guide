@@ -23,11 +23,12 @@
         Import 語法是不能換行的，所以長度不受80字元長度限制
         3.4.1.1 Import 路徑
             例如:
-            `
-import './sideeffects.js';
-import * as goog from '../closure/goog/goog.js';
-import * as parent from '../parent.js';
-import {name} from './sibling.js'; 
+            ```javascript
+            import './sideeffects.js';
+            import * as goog from '../closure/goog/goog.js';
+            import * as parent from '../parent.js';
+            import {name} from './sibling.js';
+	    ```
 `
 3.4.1.1.1 import 時的副檔名
 Import 時必須包含副檔名
