@@ -22,7 +22,7 @@
 
     3.2 @fileoverview JSDoc
         自行斟酌內容及使時機，但結構以JSDoc 為主 (參考7.2)。
-        Ref: [https://jsdoc.app/](https://jsdoc.app/ https://jsdoc.app/)
+        Ref: <https://jsdoc.app/>
 
     3.3 goog.module statement
 
