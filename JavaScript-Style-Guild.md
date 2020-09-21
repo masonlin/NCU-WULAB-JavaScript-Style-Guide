@@ -5,24 +5,34 @@
 ## 2 檔名
 
     2.1 檔案命名 英文小寫、底線 \_ 或 dash \-
+    
     2.2 檔案編碼 UTF-8
+
     2.3 特殊字元
+    
         2.3.1 空白字元
             用一般空白 ASCII (0x20) 縮排不要使用 Tab 縮排
+	    
     2.3.2 特殊跳脫序列
+    
     2.3.3 非 ASCII 字元
     
 ## 3 檔案結構
     3.1 版權資訊
+    
     3.2 @fileoverview JSDoc
         自行斟酌內容及使時機，但結構以JSDoc 為主 (參考7.2)。
         Ref: https://jsdoc.app/
+	
     3.3 goog.module statement
+    
     3.4 ES 模組
+    
     3.4.1 Imports
         Import 語法是不能換行的，所以長度不受80字元長度限制
+	
         3.4.1.1 Import 路徑
-            例如:
+            例如: 
 ```javascript
             import './sideeffects.js';
             import * as goog from '../closure/goog/goog.js';
@@ -30,84 +40,105 @@
             import {name} from './sibling.js';
 ```
 
-3.4.1.1.1 import 時的副檔名
-Import 時必須包含副檔名
-					例如:
-					 import '../directory/file.js';
-3.4.1.2 同個檔案 import 多次
-不要同個檔案 import 多次
-例如不要這樣做:
-import {short} from './long/path/to/a/file.js';
-import {aLongNameThatBreaksAlignment} from './long/path/to/a/file.js';
-3.4.1.3 import 檔案的命名
-	3.4.1.3.1 import 模組時的命名
+            3.4.1.1.1 import 時的副檔名
+                Import 時必須包含副檔名
+                例如:
+```javascript
+		import '../directory/file.js';
+```
+
+        3.4.1.2 同個檔案 import 多次
+            不要同個檔案 import 多次
+            例如不要這樣做:
+```javascript	    
+            import {short} from './long/path/to/a/file.js';
+            import {aLongNameThatBreaksAlignment} from './long/path/to/a/file.js';
+```
+
+        3.4.1.3 import 檔案的命名
+	    3.4.1.3.1 import 模組時的命名
 		使用 lowerCamelCase 的命名方式，通常與 import 的檔案同名
 		例如:
+```javascript
 		import * as fileOne from '../file-one.js';
-import * as fileTwo from '../file_two.js';
-import * as fileThree from '../filethree.js';
-import * as libString from './lib/string.js';
-import * as math from './math/math.js';
-import * as vectorMath from './vector/math.js';
-3.4.1.3.2 一般預設 import 的命名方式
-	預設與檔案同名，也依循 6.2 識別規則來命名
-	例如:
-	import MyClass from '../my-class.js';  // my-class.js 裡面只有 MyClass 這個類別
-import myFunction from '../my_function.js'; // my_function.js 裡面只有 function(s)
-import SOME_CONSTANT from '../someconstant.js'; //someconstant.js 裡面只有常數
-3.4.1.3.3 模組裡的類別或函式import 的命名
-即 ( import {name} ) 這樣的 import ，其名應該保持與檔名相同，避免改名
-如 ( import {SomeThing as SomeOtherThing} )
-例如:
-import * as bigAnimals from './biganimals.js';
-import * as domesticatedAnimals from './domesticatedanimals.js';
+		import * as fileTwo from '../file_two.js';
+		import * as fileThree from '../filethree.js';
+		import * as libString from './lib/string.js';
+		import * as math from './math/math.js';
+		import * as vectorMath from './vector/math.js';
+```
 
-new bigAnimals.Cat();
-new domesticatedAnimals.Cat();
-如果仍要改名，則使用其檔名和路徑結合此類別名來改
-例如:
-import {Cat as BigCat} from './biganimals.js';
-import {Cat as DomesticatedCat} from './domesticatedanimals.js';
+            3.4.1.3.2 一般預設 import 的命名方式
+		預設與檔案同名，也依循 6.2 識別規則來命名
+		例如:
+```javascript		
+		import MyClass from '../my-class.js';  // my-class.js 裡面只有 MyClass 這個類別
+		import myFunction from '../my_function.js'; // my_function.js 裡面只有 function(s)
+		import SOME_CONSTANT from '../someconstant.js'; //someconstant.js 裡面只有常數
+```		
+            3.4.1.3.3 模組裡的類別或函式import 的命名
+		即 ( import {name} ) 這樣的 import ，其名應該保持與檔名相同，避免改名
+		如 ( import {SomeThing as SomeOtherThing} )
+		例如:
+```javascript		
+		import * as bigAnimals from './biganimals.js';
+		import * as domesticatedAnimals from './domesticatedanimals.js';
 
-new BigCat();
-new DomesticatedCat();
-3.4.2 Exports 
-3.4.2.1命名與 default exports
-	不要使用 default export，若使用則在 import 時還要特給他命名，易造成模組名
-	的不一致。
-	例如:
-	// Do not use default exports:
-export default class Foo { ... } // BAD!
-// Use named exports:
-export class Foo { ... }
-// Alternate style named exports:
-class Foo { ... }
+		new bigAnimals.Cat();
+		new domesticatedAnimals.Cat();
+```
+		如果仍要改名，則使用其檔名和路徑結合此類別名來改
+		例如:
+```javascript		
+		import {Cat as BigCat} from './biganimals.js';
+		import {Cat as DomesticatedCat} from './domesticatedanimals.js';
 
-export {Foo};
+		new BigCat();
+		new DomesticatedCat();
+```		
+        3.4.2 Exports
+	
+            3.4.2.1 命名與 default exports
+		不要使用 default export，若使用則在 import 時還要特給他命名，易造成模組名的不一致。
+		例如:
+```javascript		
+		// Do not use default exports:
+		export default class Foo { ... } // BAD!
+		// Use named exports:
+		export class Foo { ... }
+		// Alternate style named exports:
+		class Foo { ... }
 
-Ref: export 與 export default 的差異
-請自行斟酌使用
-3.4.2.2 匯出靜態變數、類別或物件
-	不要為了命名空間而匯出只有靜態變數的類別，或硬把常數塞給類別
-	例如:
-	// container.js
-// Bad: Container is an exported class that has only static methods and fields.
-export class Container {
-  /** @return {number} */
-  static bar() {
-  return 1;
-  }
-}
+		export {Foo};
+```
+		Ref: export 與 export default 的差異請自行斟酌使用
+		
+            3.4.2.2 匯出靜態變數、類別或物件
+		不要為了命名空間而匯出只有靜態變數的類別，或硬把常數塞給類別
+		例如:
+```javascript		
+		// container.js
+		// Bad: Container is an exported class that has only static methods and fields.
+		export class Container {
+  		  /** @return {number} */
+  		  static bar() {
+  		    return 1;
+  		  }
+		}
 
-/** @const {number} */
-Container.FOO = 1;
+		/** @const {number} */
+		Container.FOO = 1;
+```
 應該這樣做
-/** @return {number} */
-export function bar() {
-  return 1;
-}
+```javascript
+		/** @return {number} */
+		export function bar() {
+		  return 1;
+		}
 
-export const /** number */ FOO = 1;
+		export const /** number */ FOO = 1;
+```
+
 3.4.2.3 exports 的變異性 (Mutability of exports)
 	匯出的變數不得在模組初始化之外被變異。
 (“變異”指的是對產品代碼的一個改變，這種改變會導致代碼的行爲發生變化。)
