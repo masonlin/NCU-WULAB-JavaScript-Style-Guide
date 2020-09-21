@@ -77,8 +77,8 @@
                     import SOME_CONSTANT from '../someconstant.js'; //someconstant.js 裡面只有常數
 ```
                 3.4.1.3.3 模組裡的類別或函式import 的命名
-                    即 ( `import {name}` ) 這樣的 import ，其名應該保持與檔名相同，避免改名
-                    如 ( `import {SomeThing as SomeOtherThing}` )
+                    即 ( import {name} ) 這樣的 import ，其名應該保持與檔名相同，避免改名
+                    如 ( import {SomeThing as SomeOtherThing} )
                     例如:
 ```javascript
                     import * as bigAnimals from './biganimals.js';
@@ -190,15 +190,15 @@
 ```
 
                 3.4.2.4 export from
-	            export from 語法因為不得換行，所以不受80字元長度的限制。
+                    export from 語法因為不得換行，所以不受80字元長度的限制。
 ```javascript
-		    export {specificName} from './other.js';
-		    export * from './another.js';
+                    export {specificName} from './other.js';
+                    export * from './another.js';
 ```
 
             3.4.3 模組間的循環依賴
 		雖然 ESMAScript 規格允許，但不要這樣玩 import 和 export。
-		
+
             3.4.4 Interoperating with Closure
 
             3.4.4.1 Referencing goog
@@ -213,3 +213,217 @@
 
         3.7 實作程式檔
             先宣告完所有的引用，至少要再空一行後，再開始撰寫程式。
+	    
+4 格式
+		術語: 塊狀結構 (block-like construct) 指的是類別、函式、方法或大括號區塊的程式碼
+本體
+4.1 大括號
+	4.1.1所有的控制結構都使用大括號
+		例如if, else, for, do, while … 等等
+4.1.2 非空白區塊: 
+	開括號前不換行
+	開括號後換行
+	閉括號前換行
+閉括號後換行，但 else、catch、while、逗號、分號或右括號除外。
+	例如:
+class InnerClass {
+	constructor() {}
+
+	/** @param {number} foo */
+	method(foo) {
+		if (condition(foo)) {
+			try {
+ 				// Note: this might fail.
+ 				something();	
+			} catch (err) {
+ 				recover();
+			}
+		}
+	}
+}
+4.1.3 空白區塊: 簡潔
+	例如: 
+	function doNothing() {}
+4.2 區塊縮排: 
+2個空白，適用於程式碼及註釋。
+	4.2.1 陣列: 
+區塊格式是可選的，應該需求而變化。
+例如:
+const a = [
+	0,
+	1,
+	2,
+];
+
+const b =
+	[0, 1, 2];
+const c = [0, 1, 2];
+someMethod(foo, [
+	0, 1, 2,
+], bar);
+其它的格式也是允許的，尤其強調語意而分組時，但切勿只為了減少大陣列的
+程式碼行數而為之。
+4.2.3 類別
+				不要在方法或類別區塊結尾加上分號，除非是個表示式。
+				/** @extends {Foo<string>} */
+foo.Bar = class extends Foo {
+/** @override */
+  method() {
+    return super.method() / 2;
+  }
+};
+				
+/** @interface */
+class Frobnicator {
+/** @param {string} message */
+  frobnicate(message) {}
+}
+4.2.4 函式表示式
+	當匿名函式在函式中作為參數時，也是要縮排2個空格於其上層函式。
+	例如:
+	prefix.something.reallyLongFunctionName('whatever', (a1, a2) => {
+// Indent the function body +2 relative to indentation depth
+// of the 'prefix' statement one line above.
+if (a1.equals(a2)) {
+someOtherLongFunctionName(a1);
+} else {
+andNowForSomethingCompletelyDifferent(a2.parrot);
+}
+});
+
+some.reallyLongFunctionCall(arg1, arg2, arg3)
+.thatsWrapped()
+.then((result) => {
+// Indent the function body +2 relative to the indentation depth
+// of the '.then()' call.
+if (result) {
+result.use();
+}
+});
+4.2.5 Switch 陳述式
+case 及 default 前都是縮排2空格，label後的新行接著 case 或者 default都是再
+縮排2空格。
+switch (animal) {
+  case Animal.BANDERSNATCH:
+    handleBandersnatch();
+    break;
+
+  case Animal.JABBERWOCK:
+    handleJabberwock();
+    break;
+
+  default:
+    throw new Error('Unknown animal');
+}
+4.3 陳述式
+4.3.1 一行一個陳述式
+	一行一個陳述式
+4.3.2 使用分號
+	每個陳述式結尾都要使用分號。禁止使用自動插入分號。
+4.4 每行長度限制: 80 字元或不要超過一個螢幕寛，先自行斟酌
+	除了以下所示以外，JavaScript 每行長度限制為80碼，超過此長度請
+折行 (換行line-wrapped)，折行的位置請自行判斷。
+例外:
+-	程式碼中應可被點擊的長URL
+-	會被 copied-and-pasted 的shell 指令
+-	需要被完全複製或搜索的長字符串
+4.5 折行(行包裏 Line-wrapping)
+4.5.1 何時換行
+		折行徧好以更高的語法層次 (higher syntactic level) 來進行。
+		例如:
+		首選
+		currentEstimate =
+calc(currentEstimate + x * currentEstimate) /
+2.0;
+		遜色
+currentEstimate = calc(currentEstimate + x *
+currentEstimate) / 2.0;
+以上例而言其語法層次由上而下依序為: 等號、除號、函式呼叫、參數、常數。
+運算子的包裹 (wrapped) 法如下:
+1.	行中有運算子要換行時，應在該符號後換行。
+2.	方法或建構子後直接接著開括號 “(”。
+3.	逗號 “,” 緊接在前面的文字或符號。
+提醒: 折行的目的是為了讓程式碼更加清楚，無需執著在少行數上。
+4.5.2 折行的縮排至少要有4個空格
+	至少有要有4個空格，除非是要符合這個折行區塊的規則。而同個層次的縮排
+	則要一樣。
+4.6 空白
+	4.6.1 垂直空白行
+		何時出現一個空白行:
+1.	類別或物件裡的連續方法之間。
+			例外情況: 
+			類別中連續屬性間的邏輯分組可以選擇性地空一行。
+2.	在方法區塊裡的屬性邏輯分組要盡量僅慎。而函式裡的起始和結尾之間不允許空白。
+3.	在類別或物件的啟始或結尾的方法後是否空白是可選的,
+允許多行空白，但不鼓勵。
+4.6.2 水平空白
+	此空白取決於所在位置，分為三類：頭 (如縮排)、尾 (被禁止) 和中間。
+	單一空白只出現在以下地方:
+1.	除了function及super外，用以區隔保留字 (像是 if 、 for 、 或是 catch )，以及開括號 ”(” 後。
+2.	閉大括號 “}” 後用以區隔保留字 (像是 else 或是 catch )。
+3.	開大括號 “{” 前，除以下二者例外:
+a.	放在函式的第一個參數或陣例中的第一個元素(例如: foo({a: [{c: d}]}))。
+b.	模板擴展 (例如正規表示式，有效 `ab${1 + 2}cd`，無效 `xy$ {3}z`)。
+4.	任何運算符號二側。
+5.	逗號及分號之後。
+6.	冒號之後。
+7.	陳述式後的註解用的雙斜線 (//) 二側，這裡也允許是多個空隔。
+8.	區塊註解的啟始符號 (/**) 之後及其結束符號 (*/) 的二側，例如:
+this.foo = /** @type {number} */ (bar)
+function(/** string */ foo) {
+baz(/* buzz= */ true)
+4.6.3 水平對齊
+	以下二者皆允許但第二個不鼓勵
+{
+  	    tiny: 42, // this is great
+  	    longer: 435, // this too
+};
+	下面這個不鼓勵
+{
+  	    tiny:      42,  // permitted, but future edits
+  	    longer: 435, // may leave it unaligned
+};
+4.6.4 函式參數
+建議將所有參數放在與函式名同一行上，若過長需換行，則應依可讀的方式換行。換行則以一個參數為一行，縮排4毎空白；可以對齊括號，但不鼓勵，以下為例子:
+
+
+
+//參數換行縮排4空格，適用在函式名稱很長時；參數放第二行時盡量全在這行
+                           doSomething(
+    				        descriptiveArgumentOne, descriptiveArgumentTwo, descriptiveArgumentThree) {
+ 					 // …
+}
+//參數名稱長時，不建議這樣用
+doSomething(veryDescriptiveArgumentNumberOne, veryDescriptiveArgumentTwo,
+    tableModelEventHandlerProxy, artichokeDescriptorAdapterIterator) {
+  // …
+}
+//改這樣，一個參數一行
+				doSomething(
+    					veryDescriptiveArgumentNumberOne,
+    					veryDescriptiveArgumentTwo,
+    					tableModelEventHandlerProxy,
+    					artichokeDescriptorAdapterIterator) {
+  				   // …
+}
+4.7 分組括號
+       略
+4.8 註解
+      詳參考第7章 JSDoc
+4.8.1 區塊註解
+ 	 第一行和最後一行無內容
+       	/*
+ 		  * This is
+ 		  * okay.
+ 		  */
+              多行這樣可以
+// And so
+// is this.
+		單行這樣也可以
+/* This is fine, too. */
+  	       但單純的內容註解不要使用 JSDoc 的方式
+		/** … */
+4.8.2 參數的註解
+	參數名稱不能完全傳達意思時使用
+	someFunction(obviousParam, true /* shouldRender */, 'hello' /* name */);
+	    
