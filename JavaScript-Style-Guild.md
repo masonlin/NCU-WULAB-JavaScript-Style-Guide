@@ -1,4 +1,8 @@
-2 檔名
+# JavaScript Style Guide
+
+## 1 引言
+
+## 2 檔名
 
 2.1 檔案命名 英文小寫、底線 \_ ~~或dash -~~
 
