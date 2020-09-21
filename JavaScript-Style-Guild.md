@@ -77,8 +77,8 @@
                     import SOME_CONSTANT from '../someconstant.js'; //someconstant.js 裡面只有常數
 ```
                 3.4.1.3.3 模組裡的類別或函式import 的命名
-                    即 ( import {name} ) 這樣的 import ，其名應該保持與檔名相同，避免改名
-                    如 ( import {SomeThing as SomeOtherThing} )
+                    即 ( `import {name}` ) 這樣的 import ，其名應該保持與檔名相同，避免改名
+                    如 ( `import {SomeThing as SomeOtherThing}` )
                     例如:
 ```javascript
                     import * as bigAnimals from './biganimals.js';
