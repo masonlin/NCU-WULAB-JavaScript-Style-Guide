@@ -1,3 +1,8 @@
+[https://jsdoc.app/]: https://jsdoc.app/  
+
+[JSDoc]: https://jsdoc.app/  
+
+
 # JavaScript Style Guide
 
 ## 1 引言
@@ -23,7 +28,9 @@
     3.2 @fileoverview JSDoc
         自行斟酌內容及使時機，但結構以JSDoc 為主 (參考7.2)。  
    
-   Ref: [https://jsdoc.app/](https://jsdoc.app/)  
+        Ref: [https://jsdoc.app/]
+	
+	Ref: [JSDoc]
 
     3.3 goog.module statement
 
