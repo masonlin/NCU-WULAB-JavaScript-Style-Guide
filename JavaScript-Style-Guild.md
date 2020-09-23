@@ -1,8 +1,3 @@
-[https://jsdoc.app/]: https://jsdoc.app/  
-
-[JSDoc]: https://jsdoc.app/  
-
-
 # JavaScript Style Guide
 
 ## 1 引言
@@ -22,16 +17,15 @@
 
     2.3.3 非 ASCII 字元
 
-## 3 檔案結構
+## 3 檔案結構  
+
     3.1 版權資訊
 
     3.2 @fileoverview JSDoc
         自行斟酌內容及使時機，但結構以JSDoc 為主 (參考7.2)。  
+    
+   Ref: [https://jsdoc.app/](https://jsdoc.app/)
    
-        Ref: [https://jsdoc.app/]
-	
-	Ref: [JSDoc]
-
     3.3 goog.module statement
 
     3.4 ES 模組
@@ -221,7 +215,7 @@
 
         3.7 實作程式檔
             先宣告完所有的引用，至少要再空一行後，再開始撰寫程式。
-	    
+
 ## 4 格式
     術語: 塊狀結構 (block-like construct) 指的是類別、函式、方法或大括號區塊的程式碼本體
     
@@ -245,7 +239,7 @@
                 if (condition(foo)) {
                   try {
                      // Note: this might fail.
-                     something();	
+                     something();
                   } catch (err) {
                   recover();
                   }
@@ -256,7 +250,7 @@
 
         4.1.3 空白區塊: 
             簡潔，例如:
-```javascript	    
+```javascript
             function doNothing() {}
 ```
 
@@ -265,7 +259,7 @@
 	
         4.2.1 陣列: 
             區塊格式是可選的，應該需求而變化。例如:
-```javascript	    
+```javascript
             const a = [
                 0,
                 1,
@@ -282,58 +276,66 @@
 
             其它的格式也是允許的，尤其強調語意而分組時，但切勿只為了減少大陣列的程式碼行數而為之。
 	    
-4.2.3 類別
-				不要在方法或類別區塊結尾加上分號，除非是個表示式。
-				/** @extends {Foo<string>} */
-foo.Bar = class extends Foo {
-/** @override */
-  method() {
-    return super.method() / 2;
-  }
-};
+        4.2.3 類別
+            不要在方法或類別區塊結尾加上分號，除非是個表示式。
+```javascript
+            /** @extends {Foo<string>} */
+            foo.Bar = class extends Foo {
+              /** @override */
+              method() {
+                return super.method() / 2;
+              }
+            };
 				
-/** @interface */
-class Frobnicator {
-/** @param {string} message */
-  frobnicate(message) {}
-}
-4.2.4 函式表示式
-	當匿名函式在函式中作為參數時，也是要縮排2個空格於其上層函式。
-	例如:
-	prefix.something.reallyLongFunctionName('whatever', (a1, a2) => {
-// Indent the function body +2 relative to indentation depth
-// of the 'prefix' statement one line above.
-if (a1.equals(a2)) {
-someOtherLongFunctionName(a1);
-} else {
-andNowForSomethingCompletelyDifferent(a2.parrot);
-}
-});
+            /** @interface */
+            class Frobnicator {
+            /** @param {string} message */
+              frobnicate(message) {}
+            }
+```
 
-some.reallyLongFunctionCall(arg1, arg2, arg3)
-.thatsWrapped()
-.then((result) => {
-// Indent the function body +2 relative to the indentation depth
-// of the '.then()' call.
-if (result) {
-result.use();
-}
-});
-4.2.5 Switch 陳述式
-case 及 default 前都是縮排2空格，label後的新行接著 case 或者 default都是再
-縮排2空格。
-switch (animal) {
-  case Animal.BANDERSNATCH:
-    handleBandersnatch();
-    break;
+        4.2.4 函式表示式
+            當匿名函式在函式中作為參數時，也是要縮排2個空格於其上層函式。
+            例如:
+```javascript
+            prefix.something.reallyLongFunctionName('whatever', (a1, a2) => {
+              // Indent the function body +2 relative to indentation depth
+              // of the 'prefix' statement one line above.
+              if (a1.equals(a2)) {
+                someOtherLongFunctionName(a1);
+              } else {
+                andNowForSomethingCompletelyDifferent(a2.parrot);
+              }
+            });
 
-  case Animal.JABBERWOCK:
-    handleJabberwock();
-    break;
+            some.reallyLongFunctionCall(arg1, arg2, arg3)
+                .thatsWrapped()
+                .then((result) => {
+                  // Indent the function body +2 relative to the indentation depth
+                  // of the '.then()' call.
+                  if (result) {
+                    result.use();
+                  }
+                });
+```		
+		
+        4.2.5 Switch 陳述式
+            case 及 default 前都是縮排2空格，label後的新行接著 case 或者 default都是再縮排2空格。
+```javascript
+            switch (animal) {
+                case Animal.BANDERSNATCH:
+                handleBandersnatch();
+                break;
 
-  default:
-    throw new Error('Unknown animal');
-}
+              case Animal.JABBERWOCK:
+                handleJabberwock();
+                break;
+
+              default:
+                throw new Error('Unknown animal');
+            }
+```
+
 4.3 陳述式
 4.3.1 一行一個陳述式
 	一行一個陳述式
