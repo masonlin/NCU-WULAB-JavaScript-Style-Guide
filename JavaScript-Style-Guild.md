@@ -504,3 +504,332 @@
 ```javascript
                 someFunction(obviousParam, true /* shouldRender */, 'hello' /* name */);	    
 ```
+
+## 5 語言特徵
+    Javascript 有一些語法曖昧不明或危險，這章在說明哪些可用或不可用。
+    
+    5.1 區域變數的宣告
+    
+        5.1.1 使用 const 和 let
+            使用 const 和 let，不要再使用 var
+	    
+            5.1.2 一次宣告一個變數
+                不要宣告成這樣let a = 1, b = 2;
+
+            5.1.3 略
+
+            5.1.3 略
+
+        5.2 陣列所賦之值 (Array literals)
+
+            5.2.1 行尾使用逗號 略
+
+            5.2.2 不要使用變數作為 Array 建構子的引數
+```javascript
+            const a1 = new Array(x1, x2, x3);
+            const a2 = new Array(x1, x2);
+            const a3 = new Array(x1);
+            const a4 = new Array();
+```
+            上例中 a3 中的 x1 若為正整數則沒問題，但若為正整數以外的其它數值則為產生 exception。若是其它值，則會成為單一元素的陣。
+            明確地宣告長度是比較合適的作法，如 new Array(length)。
+	    
+            5.2.3 非數值屬性 略
+
+            5.2.4 解構 略
+
+            5.2.5 擴散運算子 (Spread operator)
+```javascript
+            [...foo]   // 優於 Array.prototype.slice.call(foo)
+            [...foo, ...bar]   // 優於 foo.concat(bar)
+```
+        5.3 物件所賦之值 (Object literals)
+
+            5.3.1 略
+
+            5.3.2 略
+
+            5.3.3 勿混合使用有引號和無引號的 key
+                不允許:
+```javascript
+                {
+                  width: 42, // struct-style unquoted key
+                  'maxWidth': 43, // dict-style quoted key
+}
+```
+            5.3.4 動態賦予的屬性名稱 (Computed property names)
+                例如 {['key' + foo()]: 42} 這樣建立 key 或屬性名稱是允許的
+
+            5.3.5方法速記 (Method shorthand) 略
+
+            5.3.6屬性速記 (Shorthand properties) 略
+
+        5.4 類別
+
+            5.4.1 Getters and Setters
+                不要使用 Javascript 的 Getter 及 Setter，用一般的方法實作即可。因為在編譯上存在一些問題。
+
+        5.5  函式
+            5.5.1 略
+
+            5.5.2 略
+
+            5.5.3 箭頭函式 (Arrow functions)
+                簡潔的函式寫法，且自動帶入 this，省去 fn.bind(this) 這種額外宣告的麻煩。
+	
+            5.5.4 Generators 略
+
+            5.5.5 參數 略
+
+            5.5.6 泛型 略
+
+            5.5.7 擴散運算子
+                如同 5.2.5，也可以如下使用
+```javascript
+                function myFunction(...elements) {}
+                myFunction(...array, ...iterable, ...generator());
+```
+        5.6 字串所賦之值 (String literals)
+
+            5.6.1 使用單引號
+                一般字串值使用單引號，而非雙引號。
+
+            5.6.2 模板所賦之值 (Template literals)
+                (`${文字內容}`) 應用於多行的內容，如果是多行內容時，則不用遵守縮排的規範。
+                例如:
+```javascript
+                function arithmetic(a, b) {
+                  return `Here is a table of arithmetic operations:
+${a} + ${b} = ${a + b}
+${a} - ${b} = ${a - b}
+${a} * ${b} = ${a * b}
+${a} / ${b} = ${a / b}`;
+                }
+```
+            5.6.2 非連續行 (No line continuations)
+                即一行字串折成多行，不要使用連續行符號 (line continuations, \)，雖ES5 允許使用，但它可能會引起一些不明顯的錯誤。
+                不要用:
+```javascript
+                const longString = 'This is a very long string that far exceeds the 80 \
+                    column limit. It unfortunately contains long stretches of spaces due \
+                    to how the continued lines are indented.';
+```
+                請使用 (+) 代替:
+```javascript
+                const longString = 'This is a very long string that far exceeds the 80 ' +
+                    'column limit. It does not contain long stretches of spaces since ' +
+                    'the concatenated strings are cleaner.';
+```
+        5.7 數字所賦之值 (Number literals)
+            包含 10 進制、16進制 (0x)、8進制 (0o) 及 2 進制 (0b)。
+
+        5.8 控制結構 (Control structures)
+
+            5.8.1 For loops 略
+
+            5.8.2 Exceptions
+                發生例外時請丟出 new Error 物件或其字物件，勿只丟出一個字串或其它非相干物件。
+                可在系統 Error 資訊不足時自定 Error 物件。
+                遇到 Error 應立即丟出，而非傳遞它。
+
+                5.8.2.1 空白的 catch 區塊
+                    有時 catch 發生時我們會什麼都不做，這時可加上一些說明
+```javascript
+                    try {
+                      return handleNumericResponse(response);
+                    } catch (ok) {
+                      // it's not numeric; that's fine, just continue
+                    }
+                    return handleTextResponse(response);
+```
+            5.8.2 Switch 語句 略
+
+	5.9 this 略
+
+        5.10 等於
+            一般使用 ( === / !==)，以下為例外，例如預期值為 null 或 undefined 時:
+```javascript
+            if (someObjectOrPrimitive == null) {
+              // Checking for null catches both null and undefined for objects and
+              // primitives, but does not catch other falsy values like 0 or the empty string.
+}
+```
+        5.11 不允許的功能
+            不要用 with
+            不要用 eval
+            不要自動插入分號
+            一些非標準或已被棄用的功能
+
+## 6 命名
+
+        6.1 通用的標示規則
+            不要怕變數名稱太長，不要發表可能會被誤會或無法理解的縮寫。
+```javascript
+            errorCount          // 無縮寫
+            dnsConnectionIndex  // DNS 大家都知道
+            referrerUrl         // URL 同上
+            customerId          // Id 你不知道是什麼嗎?
+```
+            不允許以下命名法
+```javascript
+            n                   // 無意義.
+            nErr              // 不清楚是什麼的縮寫詞
+            nCompConns          // 縮到不知其意
+            wgcConnections      // 只有你的團隊知道這是什麼
+            pcReader            // pc 可是以很多意思
+            cstmrId             // 刪除單字中的字母
+            kSecondsPerDay      // 不要使用匈牙利命名法，例 bBusy、nTimes
+```
+
+        6.2 命名規則
+
+            6.2.1 Package 的命名
+                lowerCamelCase 例如 my.exampleCode.deepSpace
+
+            6.2.2 類別的命名
+                UpperCamelCase 的方式。
+                其命名方式通常是使用名詞或名詞詞組，
+                例如: Request, ImmutableList, 或 VisibilityMode。
+                而介面 interface 則有時使用形容詞詞組，例如 Readable。
+
+            6.2.3 方法的命名
+                lowerCamelCase 通常使用動詞或動詞詞組，例如: sendMessage。
+
+            6.2.4 列舉的命名
+                像類別命名一樣使用UpperCamelCase，並使用單數名詞，而裡面個別的項目則用全大寫字母，單字之間使用底線分隔表示，例如: CONSTANT_CASE。
+
+            6.2.5 常數的命名
+                使用全大寫如CONSTANT_CASE 方式表示，單字間使用底線分隔，而且是在module-local (top-level) 時使用全大寫表示，方法或函式裡的常數仍是使用 lowerCamelCase 來表示。
+ 
+             6.2.6 一般變數的命名
+                開頭小寫的駝峰式 lowerCamelCase，由名詞和名詞詞組組成，例如: computedValues。
+
+            6.2.7 參數的命名
+                開頭小寫的駝峰式 lowerCamelCase，建構函式也是如此。
+                注意參數名稱不應只用一個字元來表示。
+                例外: 有些第三方框架的參數名可能使用一個字元表示，例如: $。
+
+            6.2.8區域變數的命名
+                開頭小寫的駝峰式 lowerCamelCase，且在函式範圍裡的常數也是使用 lowerCamelCase 方式表示 (module-local 才使用全大寫)。
+
+## 7 JSDoc
+    JSDoc 可用於類別、欄位、方法上。
+
+        7.1 一般形式
+            一般 JSDoc 區塊長像下面這樣
+```javascript
+            /**
+             * Multiple lines of JSDoc text are written here,
+             *  wrapped normally.
+             * @param {number} arg A number to do something to.
+             */
+```
+
+        7.2 Markdown 略
+
+        7.3 JSDoc 的標籤
+            所有的標籤都應於行首。可參考 JSDoc Block Tags 或 JSDoc Tags。
+
+        7.4 換行
+            換行空4格。如下例:
+```javascript
+            /**
+             * Illustrates line wrapping for long param/return descriptions.
+             * @param {string} foo This is a param with a description too long to fit in
+             *     one line.
+             * @return {number} This returns something that has a description too long to
+             *     fit in one line.
+             */
+            exports.method = function(foo) {
+              return 5;
+            };
+```
+
+        7.5 Top或文件級的註解
+            通常是用來說明版權、作者資訊等。其中也包含整個人件是怎麼組成，或者是提供給不熟悉內容的讀者了解程式碼是在寫什麼。換行不縮排。例如:
+```javascript
+            /**
+             * @fileoverview Description of file, its uses and information
+             * about its dependencies.
+             * @package
+             */
+```
+
+        7.6 類別的註解
+            類別、介面或模組應該要有註解說明其用及其參數、實現的介面、封裝狀況或其它適當的標籤。類別要充份說明如何使用它。如下例:
+```javascript
+            /**
+             * A fancier event target that does cool things.
+             * @implements {Iterable<string>}
+             */
+            class MyFancyTarget extends EventTarget {
+              /**
+               * @param {string} arg1 An argument that makes this more interesting.
+               * @param {!Array<number>} arg2 List of numbers to be processed.
+               */
+              constructor(arg1, arg2) {
+                // ...
+              }
+            };
+
+            /**
+             * Records are also helpful.
+             * @extends {Iterator<TYPE>}
+             * @record
+             * @template TYPE
+             */
+            class Listable {
+              /** @return {TYPE} The next item in line to be returned. */
+              next() {}
+            }
+```
+
+7.7 列舉或型別定義的註解
+所有的列舉及型別定義都應要有適當的註解及 JSDoc 的標籤 (@typedef 或 @enum) 於行首。如下例:
+```javascript
+/**
+ * A useful type union, which is reused often.
+ * @typedef {!Bandersnatch|!BandersnatchType}
+ */
+let CoolUnionType;
+
+/**
+ * Types of bandersnatches.
+ * @enum {string}
+ */
+const BandersnatchType = {
+  /** This kind is really frumious. */
+  FRUMIOUS: 'frumious',
+  /** The less-frumious kind. */
+MANXOME: 'manxome',
+};
+```
+7.8 方法和函式的註解
+如果方法是繼承而來的，請加上 @override 註解。若方法的JSDoc 或其簽名已足以表示其內意思，則其方法、參數或回傳的描述是可以省略的。
+若方法是繼承superclass而來的，則在方法上要注明 @override。方法繼承後也會把Superclass 的JSDoc 標籤一併繼承下來，固除非有額外需描述的內容，否則相同的內容不需再描述。
+例:
+```javascript
+/** A class that does something. */
+class SomeClass extends SomeBaseClass {
+  /**
+   * Operates on an instance of MyClass and returns something.
+   * @param {!MyClass} obj An object that for some reason needs detailed
+   *     explanation that spans multiple lines.
+   * @param {!OtherClass} obviousOtherClass
+   * @return {boolean} Whether something occurred.
+   */
+  someMethod(obj, obviousOtherClass) { ... }
+
+  /** @override */
+  overriddenMethod(param) { ... }
+}
+
+/**
+ * Demonstrates how top-level functions follow the same rules.  This one
+ * makes an array.
+ * @param {TYPE} arg
+ * @return {!Array<TYPE>}
+ * @template TYPE
+ */
+function makeArray(arg) { ... }
+```
