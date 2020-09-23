@@ -355,7 +355,7 @@
 
 * 需要被完全複製或搜索的長字符串  
 
-&nbsp;  
+`````` 
 
         4.5 折行(行包裏 Line-wrapping)
 
@@ -673,7 +673,7 @@ ${a} / ${b} = ${a / b}`;
             不允許以下命名法
 ```javascript
             n                   // 無意義.
-            nErr              // 不清楚是什麼的縮寫詞
+            nErr                // 不清楚是什麼的縮寫詞
             nCompConns          // 縮到不知其意
             wgcConnections      // 只有你的團隊知道這是什麼
             pcReader            // pc 可是以很多意思
