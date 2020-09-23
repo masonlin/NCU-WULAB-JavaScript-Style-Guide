@@ -1,7 +1,8 @@
 # JavaScript Style Guide
 
 ## 1 引言
-
+    這份 JavaScript 程式撰寫風格指南是參考 Google JavaScript Style Guild 而來，主要目的是提供同學統一並學習其良好的開發風格。
+    
 ## 2 檔名
 
     2.1 檔案命名 英文小寫、底線 \_ 或 dash \-
@@ -336,50 +337,59 @@
             }
 ```
 
-4.3 陳述式
-4.3.1 一行一個陳述式
-	一行一個陳述式
-4.3.2 使用分號
-	每個陳述式結尾都要使用分號。禁止使用自動插入分號。
-4.4 每行長度限制: 80 字元或不要超過一個螢幕寛，先自行斟酌
-	除了以下所示以外，JavaScript 每行長度限制為80碼，超過此長度請
-折行 (換行line-wrapped)，折行的位置請自行判斷。
-例外:
+        4.3 陳述式
+	
+            4.3.1 一行一個陳述式
+                一行一個陳述式  
+		
+            4.3.2 使用分號
+                每個陳述式結尾都要使用分號。禁止使用自動插入分號。  
+		
+        4.4 每行長度限制: 80 字元或不要超過一個螢幕寛，先自行斟酌
+            除了以下所示以外，JavaScript 每行長度限制為80碼，超過此長度請折行 (換行line-wrapped)，折行的位置請自行判斷。
+            例外:
 -	程式碼中應可被點擊的長URL
 -	會被 copied-and-pasted 的shell 指令
 -	需要被完全複製或搜索的長字符串
-4.5 折行(行包裏 Line-wrapping)
-4.5.1 何時換行
-		折行徧好以更高的語法層次 (higher syntactic level) 來進行。
-		例如:
-		首選
-		currentEstimate =
-calc(currentEstimate + x * currentEstimate) /
-2.0;
+
+        4.5 折行(行包裏 Line-wrapping)
+	
+            4.5.1 何時換行
+                折行徧好以更高的語法層次 (higher syntactic level) 來進行。
+                例如:
+                首選
+```javascript
+                currentEstimate =
+                    calc(currentEstimate + x * currentEstimate) /
+		    2.0;
+```
 		遜色
-currentEstimate = calc(currentEstimate + x *
-currentEstimate) / 2.0;
-以上例而言其語法層次由上而下依序為: 等號、除號、函式呼叫、參數、常數。
-運算子的包裹 (wrapped) 法如下:
+```javascript
+                currentEstimate = calc(currentEstimate + x *
+                    currentEstimate) / 2.0;
+```
+                以上例而言其語法層次由上而下依序為: 等號、除號、函式呼叫、參數、常數。
+                運算子的包裹 (wrapped) 法如下:
 1.	行中有運算子要換行時，應在該符號後換行。
 2.	方法或建構子後直接接著開括號 “(”。
-3.	逗號 “,” 緊接在前面的文字或符號。
-提醒: 折行的目的是為了讓程式碼更加清楚，無需執著在少行數上。
-4.5.2 折行的縮排至少要有4個空格
-	至少有要有4個空格，除非是要符合這個折行區塊的規則。而同個層次的縮排
-	則要一樣。
-4.6 空白
-	4.6.1 垂直空白行
-		何時出現一個空白行:
+3.	逗號 “,” 緊接在前面的文字或符號。  
+
+                提醒: 折行的目的是為了讓程式碼更加清楚，無需執著在少行數上。
+            4.5.2 折行的縮排至少要有4個空格
+                至少有要有4個空格，除非是要符合這個折行區塊的規則。而同個層次的縮排則要一樣。  
+		
+        4.6 空白
+            4.6.1 垂直空白行
+                何時出現一個空白行:
 1.	類別或物件裡的連續方法之間。
 			例外情況: 
 			類別中連續屬性間的邏輯分組可以選擇性地空一行。
 2.	在方法區塊裡的屬性邏輯分組要盡量僅慎。而函式裡的起始和結尾之間不允許空白。
-3.	在類別或物件的啟始或結尾的方法後是否空白是可選的,
-允許多行空白，但不鼓勵。
-4.6.2 水平空白
-	此空白取決於所在位置，分為三類：頭 (如縮排)、尾 (被禁止) 和中間。
-	單一空白只出現在以下地方:
+3.	在類別或物件的啟始或結尾的方法後是否空白是可選的,允許多行空白，但不鼓勵。  
+
+            4.6.2 水平空白
+                此空白取決於所在位置，分為三類：頭 (如縮排)、尾 (被禁止) 和中間。
+                單一空白只出現在以下地方:
 1.	除了function及super外，用以區隔保留字 (像是 if 、 for 、 或是 catch )，以及開括號 ”(” 後。
 2.	閉大括號 “}” 後用以區隔保留字 (像是 else 或是 catch )。
 3.	開大括號 “{” 前，除以下二者例外:
@@ -390,61 +400,80 @@ b.	模板擴展 (例如正規表示式，有效 `ab${1 + 2}cd`，無效 `xy$ {3}
 6.	冒號之後。
 7.	陳述式後的註解用的雙斜線 (//) 二側，這裡也允許是多個空隔。
 8.	區塊註解的啟始符號 (/**) 之後及其結束符號 (*/) 的二側，例如:
-this.foo = /** @type {number} */ (bar)
-function(/** string */ foo) {
-baz(/* buzz= */ true)
-4.6.3 水平對齊
-	以下二者皆允許但第二個不鼓勵
-{
-  	    tiny: 42, // this is great
-  	    longer: 435, // this too
-};
-	下面這個不鼓勵
-{
-  	    tiny:      42,  // permitted, but future edits
-  	    longer: 435, // may leave it unaligned
-};
-4.6.4 函式參數
-建議將所有參數放在與函式名同一行上，若過長需換行，則應依可讀的方式換行。換行則以一個參數為一行，縮排4毎空白；可以對齊括號，但不鼓勵，以下為例子:
+```javascript
+                this.foo = /** @type {number} */ (bar)
+                function(/** string */ foo) {
+                baz(/* buzz= */ true)
+```
 
+            4.6.3 水平對齊
+                以下二者皆允許但第二個不鼓勵
+```javascript
+                {
+                  tiny: 42, // this is great
+                  longer: 435, // this too
+                };
+```
+                下面這個不鼓勵
+```javascript
+                {
+                  tiny:   42,  // permitted, but future edits
+                  longer: 435, // may leave it unaligned
+                };
+```
 
+            4.6.4 函式參數
+                建議將所有參數放在與函式名同一行上，若過長需換行，則應依可讀的方式換行。換行則以一個參數為一行，縮排4毎空白；可以對齊括號，但不鼓勵，以下為例子:
+```javascript
+                //參數換行縮排4空格，適用在函式名稱很長時；參數放第二行時盡量全在這行
+                doSomething(
+                    descriptiveArgumentOne, descriptiveArgumentTwo, descriptiveArgumentThree) {
+                    // …
+                }
+                //參數名稱長時，不建議這樣用
+                doSomething(veryDescriptiveArgumentNumberOne, veryDescriptiveArgumentTwo,
+                    tableModelEventHandlerProxy, artichokeDescriptorAdapterIterator) {
+                    // …
+                }
+                //改這樣，一個參數一行
+                doSomething(
+                    veryDescriptiveArgumentNumberOne,
+                    veryDescriptiveArgumentTwo,
+                    tableModelEventHandlerProxy,
+                    artichokeDescriptorAdapterIterator) {
+                    // …
+                }
+```	
 
-//參數換行縮排4空格，適用在函式名稱很長時；參數放第二行時盡量全在這行
-                           doSomething(
-    				        descriptiveArgumentOne, descriptiveArgumentTwo, descriptiveArgumentThree) {
- 					 // …
-}
-//參數名稱長時，不建議這樣用
-doSomething(veryDescriptiveArgumentNumberOne, veryDescriptiveArgumentTwo,
-    tableModelEventHandlerProxy, artichokeDescriptorAdapterIterator) {
-  // …
-}
-//改這樣，一個參數一行
-				doSomething(
-    					veryDescriptiveArgumentNumberOne,
-    					veryDescriptiveArgumentTwo,
-    					tableModelEventHandlerProxy,
-    					artichokeDescriptorAdapterIterator) {
-  				   // …
-}
-4.7 分組括號
-       略
-4.8 註解
-      詳參考第7章 JSDoc
-4.8.1 區塊註解
- 	 第一行和最後一行無內容
-       	/*
- 		  * This is
- 		  * okay.
- 		  */
-              多行這樣可以
-// And so
-// is this.
-		單行這樣也可以
-/* This is fine, too. */
-  	       但單純的內容註解不要使用 JSDoc 的方式
-		/** … */
-4.8.2 參數的註解
-	參數名稱不能完全傳達意思時使用
-	someFunction(obviousParam, true /* shouldRender */, 'hello' /* name */);
+        4.7 分組括號 略
+	
+        4.8 註解
+            詳參考第7章 JSDoc
 	    
+            4.8.1 區塊註解
+                第一行和最後一行無內容
+```javascript		
+                /*
+                 * This is
+                 * okay.
+                 */
+```
+                多行這樣可以
+```javascript
+                // And so
+                // is this.
+```
+                單行這樣也可以
+```javascript
+                /* This is fine, too. */
+```		
+                但單純的內容註解不要使用 JSDoc 的方式
+```javascript
+                /** … */
+```
+
+            4.8.2 參數的註解
+                參數名稱不能完全傳達意思時使用
+```javascript
+                someFunction(obviousParam, true /* shouldRender */, 'hello' /* name */);	    
+```
