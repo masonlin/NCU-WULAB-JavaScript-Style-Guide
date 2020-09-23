@@ -1,3 +1,5 @@
+ref: [https://jsdoc.app/](https://jsdoc.app/)
+
 # JavaScript Style Guide
 
 ## 1 引言
@@ -215,55 +217,67 @@
         3.7 實作程式檔
             先宣告完所有的引用，至少要再空一行後，再開始撰寫程式。
 	    
-4 格式
-		術語: 塊狀結構 (block-like construct) 指的是類別、函式、方法或大括號區塊的程式碼
-本體
-4.1 大括號
-	4.1.1所有的控制結構都使用大括號
-		例如if, else, for, do, while … 等等
-4.1.2 非空白區塊: 
-	開括號前不換行
-	開括號後換行
-	閉括號前換行
-閉括號後換行，但 else、catch、while、逗號、分號或右括號除外。
+## 4 格式
+    術語: 塊狀結構 (block-like construct) 指的是類別、函式、方法或大括號區塊的程式碼本體
+    
+    4.1 大括號
+    
+        4.1.1所有的控制結構都使用大括號
+            例如if, else, for, do, while … 等等
+	    
+        4.1.2 非空白區塊: 
+            開括號前不換行
+            開括號後換行
+            閉括號前換行
+            閉括號後換行，但 else、catch、while、逗號、分號或右括號除外。
 	例如:
-class InnerClass {
-	constructor() {}
+```javascript
+            class InnerClass {
+              constructor() {}
 
-	/** @param {number} foo */
-	method(foo) {
-		if (condition(foo)) {
-			try {
- 				// Note: this might fail.
- 				something();	
-			} catch (err) {
- 				recover();
-			}
-		}
-	}
-}
-4.1.3 空白區塊: 簡潔
-	例如: 
-	function doNothing() {}
-4.2 區塊縮排: 
-2個空白，適用於程式碼及註釋。
-	4.2.1 陣列: 
-區塊格式是可選的，應該需求而變化。
-例如:
-const a = [
-	0,
-	1,
-	2,
-];
+              /** @param {number} foo */
+              method(foo) {
+                if (condition(foo)) {
+                  try {
+                     // Note: this might fail.
+                     something();	
+                  } catch (err) {
+                  recover();
+                  }
+                }
+              }
+            }
+````
 
-const b =
-	[0, 1, 2];
-const c = [0, 1, 2];
-someMethod(foo, [
-	0, 1, 2,
-], bar);
-其它的格式也是允許的，尤其強調語意而分組時，但切勿只為了減少大陣列的
-程式碼行數而為之。
+        4.1.3 空白區塊: 
+            簡潔，例如:
+```javascript	    
+            function doNothing() {}
+```
+
+    4.2 區塊縮排: 
+        2個空白，適用於程式碼及註釋。
+	
+        4.2.1 陣列: 
+            區塊格式是可選的，應該需求而變化。
+            例如:
+```javascript	    
+            const a = [
+                0,
+                1,
+                2,
+            ];
+
+            const b =
+                [0, 1, 2];
+            const c = [0, 1, 2];
+            someMethod(foo, [
+                0, 1, 2,
+            ], bar);
+```
+
+            其它的格式也是允許的，尤其強調語意而分組時，但切勿只為了減少大陣列的程式碼行數而為之。
+	    
 4.2.3 類別
 				不要在方法或類別區塊結尾加上分號，除非是個表示式。
 				/** @extends {Foo<string>} */
