@@ -555,7 +555,7 @@
                 {
                   width: 42, // struct-style unquoted key
                   'maxWidth': 43, // dict-style quoted key
-}
+                }
 ```
             5.3.4 動態賦予的屬性名稱 (Computed property names)
                 例如 {['key' + foo()]: 42} 這樣建立 key 或屬性名稱是允許的
@@ -784,52 +784,55 @@ ${a} / ${b} = ${a / b}`;
             }
 ```
 
-7.7 列舉或型別定義的註解
-所有的列舉及型別定義都應要有適當的註解及 JSDoc 的標籤 (@typedef 或 @enum) 於行首。如下例:
+        7.7 列舉或型別定義的註解
+            所有的列舉及型別定義都應要有適當的註解及 JSDoc 的標籤 (@typedef 或 @enum) 於行首。如下例:
 ```javascript
-/**
- * A useful type union, which is reused often.
- * @typedef {!Bandersnatch|!BandersnatchType}
- */
-let CoolUnionType;
+            /**
+             * A useful type union, which is reused often.
+             * @typedef {!Bandersnatch|!BandersnatchType}
+             */
+            let CoolUnionType;
 
-/**
- * Types of bandersnatches.
- * @enum {string}
- */
-const BandersnatchType = {
-  /** This kind is really frumious. */
-  FRUMIOUS: 'frumious',
-  /** The less-frumious kind. */
-MANXOME: 'manxome',
-};
+            /**
+             * Types of bandersnatches.
+             * @enum {string}
+             */
+            const BandersnatchType = {
+              /** This kind is really frumious. */
+              FRUMIOUS: 'frumious',
+              /** The less-frumious kind. */
+              MANXOME: 'manxome',
+            };
 ```
-7.8 方法和函式的註解
-如果方法是繼承而來的，請加上 @override 註解。若方法的JSDoc 或其簽名已足以表示其內意思，則其方法、參數或回傳的描述是可以省略的。
-若方法是繼承superclass而來的，則在方法上要注明 @override。方法繼承後也會把Superclass 的JSDoc 標籤一併繼承下來，固除非有額外需描述的內容，否則相同的內容不需再描述。
-例:
+
+        7.8 方法和函式的註解
+            如果方法是繼承而來的，請加上 @override 註解。若方法的JSDoc 或其簽名已足以表示其內意思，則其方法、
+            參數或回傳的描述是可以省略的。
+            若方法是繼承superclass而來的，則在方法上要注明 @override。方法繼承後也會把Superclass 的JSDoc 標籤一併繼承下來，
+            固除非有額外需描述的內容，否則相同的內容不需再描述。
+            例:
 ```javascript
-/** A class that does something. */
-class SomeClass extends SomeBaseClass {
-  /**
-   * Operates on an instance of MyClass and returns something.
-   * @param {!MyClass} obj An object that for some reason needs detailed
-   *     explanation that spans multiple lines.
-   * @param {!OtherClass} obviousOtherClass
-   * @return {boolean} Whether something occurred.
-   */
-  someMethod(obj, obviousOtherClass) { ... }
+            /** A class that does something. */
+            class SomeClass extends SomeBaseClass {
+              /**
+               * Operates on an instance of MyClass and returns something.
+               * @param {!MyClass} obj An object that for some reason needs detailed
+               *     explanation that spans multiple lines.
+               * @param {!OtherClass} obviousOtherClass
+               * @return {boolean} Whether something occurred.
+               */
+              someMethod(obj, obviousOtherClass) { ... }
 
-  /** @override */
-  overriddenMethod(param) { ... }
-}
+              /** @override */
+              overriddenMethod(param) { ... }
+            }
 
-/**
- * Demonstrates how top-level functions follow the same rules.  This one
- * makes an array.
- * @param {TYPE} arg
- * @return {!Array<TYPE>}
- * @template TYPE
- */
-function makeArray(arg) { ... }
+            /**
+             * Demonstrates how top-level functions follow the same rules.  This one
+             * makes an array.
+             * @param {TYPE} arg
+             * @return {!Array<TYPE>}
+             * @template TYPE
+             */
+            function makeArray(arg) { ... }
 ```
