@@ -355,8 +355,7 @@
 
 * 需要被完全複製或搜索的長字符串  
 
-```javascript
-```
+&nbsp;
 
         4.5 折行(行包裏 Line-wrapping)
 
