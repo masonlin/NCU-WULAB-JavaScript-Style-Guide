@@ -1,5 +1,3 @@
-ref: [https://jsdoc.app/](https://jsdoc.app/)
-
 # JavaScript Style Guide
 
 ## 1 引言
@@ -23,9 +21,9 @@ ref: [https://jsdoc.app/](https://jsdoc.app/)
     3.1 版權資訊
 
     3.2 @fileoverview JSDoc
-        自行斟酌內容及使時機，但結構以JSDoc 為主 (參考7.2)。
-
-        Ref: [https://jsdoc.app/](https://jsdoc.app/)
+        自行斟酌內容及使時機，但結構以JSDoc 為主 (參考7.2)。  
+   
+   Ref: [https://jsdoc.app/](https://jsdoc.app/)  
 
     3.3 goog.module statement
 
@@ -230,7 +228,7 @@ ref: [https://jsdoc.app/](https://jsdoc.app/)
             開括號後換行
             閉括號前換行
             閉括號後換行，但 else、catch、while、逗號、分號或右括號除外。
-	例如:
+            例如:
 ```javascript
             class InnerClass {
               constructor() {}
@@ -259,8 +257,7 @@ ref: [https://jsdoc.app/](https://jsdoc.app/)
         2個空白，適用於程式碼及註釋。
 	
         4.2.1 陣列: 
-            區塊格式是可選的，應該需求而變化。
-            例如:
+            區塊格式是可選的，應該需求而變化。例如:
 ```javascript	    
             const a = [
                 0,
