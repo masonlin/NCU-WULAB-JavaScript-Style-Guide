@@ -162,10 +162,10 @@ export function mutateFoo() {
 * @param {function(number): number} newMutateFoo
 */
 export function setMutateFoo(newMutateFoo) {
-// Exported classes and functions can be mutated!
- mutateFoo = () => {
-   foo = newMutateFoo(foo);
- };
+  // Exported classes and functions can be mutated!
+  mutateFoo = () => {
+    foo = newMutateFoo(foo);
+  };
 }
 ```
 * 如果有需要變更模組裡的變數，則應該透過函式來修改它，實現JS的封裝能力
@@ -289,7 +289,7 @@ foo.Bar = class extends Foo {
 
 /** @interface */
 class Frobnicator {
-/** @param {string} message */
+  /** @param {string} message */
   frobnicate(message) {}
 }
 ```
@@ -324,7 +324,7 @@ some.reallyLongFunctionCall(arg1, arg2, arg3)
 
 ```javascript
 switch (animal) {
-    case Animal.BANDERSNATCH:
+  case Animal.BANDERSNATCH:
     handleBandersnatch();
     break;
 
@@ -623,8 +623,8 @@ return handleTextResponse(response);
 * 一般使用 ( === / !==)，以下為例外，例如預期值為 null 或 undefined 時:
 ```javascript
 if (someObjectOrPrimitive == null) {
-// Checking for null catches both null and undefined for objects and
-// primitives, but does not catch other falsy values like 0 or the empty string.
+  // Checking for null catches both null and undefined for objects and
+  // primitives, but does not catch other falsy values like 0 or the empty string.
 }
 ```
 5.11 不允許的功能
