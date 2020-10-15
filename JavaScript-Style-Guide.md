@@ -238,10 +238,10 @@ class InnerClass {
   method(foo) {
     if (condition(foo)) {
       try {
-         // Note: this might fail.
-         something();
+        // Note: this might fail.
+        something();
       } catch (err) {
-      recover();
+        recover();
       }
     }
   }
