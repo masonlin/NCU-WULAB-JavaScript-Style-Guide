@@ -178,16 +178,16 @@ let /** function(number): number */ mutateFooFunc = foo => foo + 1;
 
 /** @return {number} */
 export function getFoo() {
- return foo;
+  return foo;
 }
 
 export function mutateFoo() {
- foo = mutateFooFunc(foo);
+  foo = mutateFooFunc(foo);
 }
 
 /** @param {function(number): number} mutateFoo */
 export function setMutateFoo(mutateFoo) {
- mutateFooFunc = mutateFoo;
+  mutateFooFunc = mutateFoo;
 }
 ```
 
@@ -222,7 +222,7 @@ export * from './another.js';
 4.1 大括號
 
 4.1.1所有的控制結構都使用大括號
-* 例如if, else, for, do, while … 等等
+* 例如 if, else, for, do, while … 等等
 
 4.1.2 非空白區塊: 
 * 開括號前不換行
@@ -251,7 +251,7 @@ class InnerClass {
 4.1.3 空白區塊: 
 * 簡潔，例如:
 ```javascript
-            function doNothing() {}
+function doNothing() {}
 ```
 
 4.2 區塊縮排: 
