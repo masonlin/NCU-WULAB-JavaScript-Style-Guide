@@ -693,7 +693,7 @@ JSDoc 可用於類別、欄位、方法上。
 ```javascript
 /**
  * Multiple lines of JSDoc text are written here,
- *  wrapped normally.
+ * wrapped normally.
  * @param {number} arg A number to do something to.
  */
 ```
